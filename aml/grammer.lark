@@ -1,0 +1,17 @@
+start: node
+
+
+%import common.INT
+%import common.FLOAT
+STR: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/
+%import common.CNAME -> NAME
+
+val: arr | node | INT | FLOAT | STR | NAME
+
+node: NAME "{" (attr)* "}"
+attr: NAME ":" val
+
+arr: "[" (val)* "]"
+
+%import common.WS
+%ignore WS
