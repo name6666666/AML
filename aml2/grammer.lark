@@ -1,0 +1,19 @@
+start: node
+
+
+%import common.INT
+%import common.FLOAT
+STR: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/
+TEXT: /(?!\d)[^{}:\[\]\s]+/
+
+
+
+val: arr | node | INT | FLOAT | STR | TEXT
+
+node: TEXT "{" (attr | val)* "}"
+attr: TEXT ":" val
+
+arr: "[" (val)* "]"
+
+%import common.WS
+%ignore WS
